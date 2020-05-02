@@ -24,6 +24,9 @@ export default function Login() {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then(function () {
+        setLoading(false);
+      })
       .catch((err) => {
         setLoading(false);
         setError(err.message);
@@ -32,54 +35,56 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>{`Olá denovo.\nBem vindo de volta`}</Text>
+      <View style={{ width: "100%", height: "auto" }}>
+        <Text style={styles.greeting}>{`Olá denovo.\nBem vindo de volta`}</Text>
 
-      <View style={styles.errorMessage}>
-        {error && <Text style={styles.error}>{error}</Text>}
-      </View>
-
-      <View style={styles.form}>
-        <View>
-          <Text style={styles.inputTitle}>Email</Text>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            value={email}
-            onChangeText={setEmail}
-          />
+        <View style={styles.errorMessage}>
+          {error && <Text style={styles.error}>{error}</Text>}
         </View>
 
-        <View style={{ marginTop: 32 }}>
-          <Text style={styles.inputTitle}>Senha</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            autoCapitalize="none"
-            value={password}
-            onChangeText={setPassword}
-          />
+        <View style={styles.form}>
+          <View>
+            <Text style={styles.inputTitle}>Email</Text>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
+            />
+          </View>
+
+          <View style={{ marginTop: 32 }}>
+            <Text style={styles.inputTitle}>Senha</Text>
+            <TextInput
+              style={styles.input}
+              secureTextEntry
+              autoCapitalize="none"
+              value={password}
+              onChangeText={setPassword}
+            />
+          </View>
         </View>
-      </View>
 
-      <TouchableOpacity onPress={() => handleLogin()} style={styles.button}>
-        {loading ? (
-          <ActivityIndicator size="small" color="#FFF" />
-        ) : (
-          <Text style={{ color: "#FFF", fontWeight: "500" }}>Entrar</Text>
-        )}
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleLogin()} style={styles.button}>
+          {loading ? (
+            <ActivityIndicator size="small" color="#FFF" />
+          ) : (
+            <Text style={{ color: "#FFF", fontWeight: "500" }}>Entrar</Text>
+          )}
+        </TouchableOpacity>
 
-      <TouchableOpacity style={{ alignSelf: "center", marginTop: 32 }}>
-        <Text style={{ color: "#414959", fontSize: 13 }}>
-          Novo aqui?{" "}
-          <Text
-            onPress={() => navigation.navigate("register")}
-            style={{ fontWeight: "500", color: "#E9446A" }}
-          >
-            cadastre
+        <TouchableOpacity style={{ alignSelf: "center", marginTop: 32 }}>
+          <Text style={{ color: "#414959", fontSize: 13 }}>
+            Novo aqui?{" "}
+            <Text
+              onPress={() => navigation.navigate("register")}
+              style={{ fontWeight: "500", color: "#E9446A" }}
+            >
+              cadastre
+            </Text>
           </Text>
-        </Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -87,6 +92,8 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   greeting: {
     marginTop: 32,

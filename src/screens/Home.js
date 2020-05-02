@@ -13,14 +13,14 @@ export default function Home() {
   }, []);
 
   function singOutUser() {
-    firebase.auth().singOutUser();
+    firebase.auth().signOut();
   }
 
   return (
     <View>
       <Text>Olá {name}</Text>
 
-      <TouchableOpacity style={{ marginTop: 32 }} onPress={() => singoutUser()}>
+      <TouchableOpacity style={{ marginTop: 32 }} onPress={() => singOutUser()}>
         <Text>Sair</Text>
       </TouchableOpacity>
     </View>
