@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import * as firebase from "firebase";
 import {
   View,
@@ -15,6 +16,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigation = useNavigation();
 
   function handleLogin() {
     setLoading(true);
@@ -70,7 +73,7 @@ export default function Login() {
         <Text style={{ color: "#414959", fontSize: 13 }}>
           Novo aqui?{" "}
           <Text
-            onPress={() => Alert.alert("teste", email)}
+            onPress={() => navigation.navigate("register")}
             style={{ fontWeight: "500", color: "#E9446A" }}
           >
             cadastre

@@ -2,6 +2,7 @@ node_modules/**/*
 .expo/*
 .expo-shared
 npm-debug.*
+config/**/*
 *.jks
 *.p8
 *.p12
