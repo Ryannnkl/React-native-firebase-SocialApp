@@ -5,7 +5,9 @@ import {
   View,
   Text,
   Alert,
+  Image,
   StyleSheet,
+  StatusBar,
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
@@ -38,6 +40,17 @@ export default function Register() {
   }
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
+      <Image
+        source={require("../../assets/authHeader.png")}
+        style={{
+          position: "absolute",
+          top: -100,
+          right: -150,
+          width: 500,
+          height: 320,
+        }}
+      />
       <View style={{ width: "100%", height: "auto" }}>
         <Text style={styles.greeting}>{`Olá !\nCadastre-se para iniciar`}</Text>
 
@@ -98,6 +111,18 @@ export default function Register() {
           </Text>
         </TouchableOpacity>
       </View>
+      <Image
+        source={require("../../assets/authHeader.png")}
+        style={{
+          position: "absolute",
+          bottom: -200,
+          right: -50,
+          opacity: 0.4,
+          width: 500,
+          height: 320,
+          zIndex: -5,
+        }}
+      />
     </View>
   );
 }

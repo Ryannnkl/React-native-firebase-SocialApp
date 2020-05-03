@@ -24,8 +24,8 @@ function AppStack() {
 function AuthStack() {
   return (
     <Stack.Navigator headerMode="none" initialRouteName="login">
-      <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="register" component={Register} />
+      <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   );
 }

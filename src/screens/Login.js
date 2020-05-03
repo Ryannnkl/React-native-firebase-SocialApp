@@ -4,9 +4,11 @@ import * as firebase from "firebase";
 import {
   View,
   Text,
-  Alert,
-  StyleSheet,
+  Image,
   TextInput,
+  StatusBar,
+  StyleSheet,
+  LayoutAnimation,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
@@ -33,9 +35,22 @@ export default function Login() {
       });
   }
 
+  LayoutAnimation.easeInEaseOut();
+
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
       <View style={{ width: "100%", height: "auto" }}>
+        <Image
+          source={require("../../assets/authHeader.png")}
+          style={styles.imageHeaer}
+        />
+
+        <Image
+          source={require("../../assets/loginLogo.png")}
+          style={{ alignSelf: "center", marginTop: 44 }}
+        />
+
         <Text style={styles.greeting}>{`Olá denovo.\nBem vindo de volta`}</Text>
 
         <View style={styles.errorMessage}>
@@ -85,6 +100,10 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
       </View>
+      <Image
+        source={require("../../assets/authHeader.png")}
+        style={styles.imageFooter}
+      />
     </View>
   );
 }
@@ -94,6 +113,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  imageHeaer: {
+    position: "absolute",
+    width: 520,
+    height: 349,
+    top: -140,
+    right: -150,
+  },
+  imageFooter: {
+    position: "absolute",
+    opacity: 0.4,
+    width: 500,
+    height: 340,
+    bottom: -220,
+    zIndex: -5,
   },
   greeting: {
     marginTop: 32,
