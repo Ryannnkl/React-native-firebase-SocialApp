@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import {
   View,
@@ -29,9 +30,10 @@ export default function Register() {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         setLoading(false);
-        return userCredentials.user.updateProfile({
+        userCredentials.user.updateProfile({
           displayName: name,
         });
+        navigation.navigate("AppTab", { screen: "home" });
       })
       .catch((err) => {
         setLoading(false);
@@ -51,13 +53,21 @@ export default function Register() {
           height: 320,
         }}
       />
-      <View style={{ width: "100%", height: "auto" }}>
+      <View
+        style={{
+          width: "100%",
+          height: "auto",
+        }}
+      >
+        <TouchableOpacity
+          style={styles.back}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="ios-arrow-round-back" size={32} color="#FFF" />
+        </TouchableOpacity>
         <Text style={styles.greeting}>{`Olá !\nCadastre-se para iniciar`}</Text>
 
-        <View style={styles.errorMessage}>
-          {error && <Text style={styles.error}>{error}</Text>}
-        </View>
-
+        <Text>{error && <Text>{error}</Text>}</Text>
         <View style={styles.form}>
           <View>
             <Text style={styles.inputTitle}>Nome</Text>
@@ -172,6 +182,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#E9446A",
     borderRadius: 4,
     height: 52,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  back: {
+    position: "absolute",
+    top: 48,
+    left: 32,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(21,22,48,0.1)",
     alignItems: "center",
     justifyContent: "center",
   },

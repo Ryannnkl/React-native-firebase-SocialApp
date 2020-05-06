@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  LayoutAnimation,
+} from "react-native";
 import * as firebase from "firebase";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+
+  LayoutAnimation.easeInEaseOut();
 
   useEffect(() => {
     const { email, displayName } = firebase.auth().currentUser;
@@ -17,7 +25,7 @@ export default function Home() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Olá {name}</Text>
 
       <TouchableOpacity style={{ marginTop: 32 }} onPress={() => singOutUser()}>

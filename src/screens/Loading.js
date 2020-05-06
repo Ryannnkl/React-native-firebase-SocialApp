@@ -8,7 +8,7 @@ export default function Loading() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      navigation.navigate(user ? "AppStack" : "AuthStack");
+      navigation.navigate(user ? "AppTab" : "AuthStack");
     });
   }, []);
 

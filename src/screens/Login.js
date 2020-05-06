@@ -28,6 +28,7 @@ export default function Login() {
       .signInWithEmailAndPassword(email, password)
       .then(function () {
         setLoading(false);
+        navigation.navigate("AppTab", { screen: "home" });
       })
       .catch((err) => {
         setLoading(false);
