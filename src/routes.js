@@ -9,6 +9,8 @@ import Login from "./screens/Login";
 import Loading from "./screens/Loading";
 import Register from "./screens/Register";
 
+import Post from "./screens/Post";
+
 const firebaseConfig = require("./config/firebaseConfig");
 
 const Stack = createStackNavigator();
@@ -27,10 +29,11 @@ function AuthStack() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none">
+      <Stack.Navigator headerMode="none" mode="modal">
         <Stack.Screen name="loading" component={Loading} />
         <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="AppTab" component={AppTab} />
+        <Stack.Screen name="Post" component={Post} />
       </Stack.Navigator>
     </NavigationContainer>
   );
