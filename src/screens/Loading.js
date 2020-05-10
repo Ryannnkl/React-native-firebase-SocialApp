@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import * as firebase from "firebase";
+import firebase from "firebase";
+
+import Fire from "../components/Fire";
 
 export default function Loading() {
   const navigation = useNavigation();

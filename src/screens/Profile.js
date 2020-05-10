@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 export default function Profile() {
   return (
     <View style={styles.container}>
-      <Text>Message Screen</Text>
+      <Text>Profile Screen</Text>
     </View>
   );
 }
