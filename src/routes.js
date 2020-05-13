@@ -15,8 +15,9 @@ const firebaseConfig = require("./config/firebaseConfig");
 
 const Stack = createStackNavigator();
 
-firebase.initializeApp(firebaseConfig);
-
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 function AuthStack() {
   return (
     <Stack.Navigator headerMode="none" initialRouteName="login">

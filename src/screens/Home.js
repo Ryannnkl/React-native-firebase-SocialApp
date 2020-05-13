@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import {
   View,
   Text,
@@ -9,28 +10,11 @@ import {
 import * as firebase from "firebase";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-
-  LayoutAnimation.easeInEaseOut();
-
-  useEffect(() => {
-    const { email, displayName } = firebase.auth().currentUser;
-    setName(displayName);
-    setEmail(email);
-  }, []);
-
-  function singOutUser() {
-    firebase.auth().signOut();
-  }
-
   return (
     <View style={styles.container}>
-      <Text>Olá {name}</Text>
-
-      <TouchableOpacity style={{ marginTop: 32 }} onPress={() => singOutUser()}>
-        <Text>Sair</Text>
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <Text style={styles.textHeader}>Feed</Text>
+      </View>
     </View>
   );
 }
@@ -38,7 +22,23 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "space-between",
+  },
+  header: {
+    width: "100%",
+    paddingTop: 64,
+    paddingBottom: 16,
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "#EBECF4",
+    shadowColor: "#454D65",
+    shadowOffset: {
+      height: 5,
+    },
+    shadowOpacity: 0.5,
+    zIndex: 10,
   },
 });

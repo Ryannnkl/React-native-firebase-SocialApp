@@ -5,18 +5,20 @@ import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 
-const firebase = require("firebase");
-require("firebase/firestore");
+import firebase from "firebase";
+import "firebase/firestore";
 
 import Fire from "../components/Fire";
 
 import {
   View,
   Text,
-  StyleSheet,
+  Alert,
   Image,
-  SafeAreaView,
+  Button,
   TextInput,
+  StyleSheet,
+  SafeAreaView,
   TouchableOpacity,
 } from "react-native";
 
@@ -28,6 +30,7 @@ export default function Post() {
 
   useEffect(() => {
     getPhotoPermissions();
+    console.ignoredYellowBox = ["Setting a timer"];
   }, []);
 
   async function getPhotoPermissions() {
@@ -39,17 +42,22 @@ export default function Post() {
       }
     }
   }
+
   function handlePost() {
+    const data = {
+      text: text.trim(),
+      localUri: image,
+    };
+
     Fire.shared
-      .addPost(text.trim(), image)
-      .then((response) => {
+      .addPost(data)
+      .then(() => {
         setText("");
         setImage(null);
-
         navigation.goBack();
       })
       .catch((err) => {
-        Alert.alert("erro", err);
+        Alert.alert("erro", JSON.stringify(err));
       });
   }
 
@@ -58,34 +66,42 @@ export default function Post() {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
+      quality: 1,
     });
 
     if (!resul.cancelled) {
-      setImage(resul.url);
+      setImage(resul.uri);
     }
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          style={{ alignSelf: "flex-start" }}
+          onPress={() => navigation.goBack()}
+        >
           <Ionicons name="md-arrow-back" size={34} color="#D8D9DB" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handlePost()}>
-          <Text style={{ fontWeight: "bold" }}>Post</Text>
+        <TouchableOpacity
+          style={{ alignSelf: "center" }}
+          onPress={() => handlePost()}
+        >
+          <Text style={{ fontWeight: "bold", fontSize: 22 }}>Post</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.inputContaier}>
-        <Image source={require("../../assets/loginLogo.png")} />
+      <View style={styles.inputContainer}>
+        <Image
+          style={{ height: 75, width: 75, borderRadius: 75 / 2 }}
+          source={require("../../assets/loginLogo.png")}
+        />
         <TextInput
           autoFocus
-          multiline
-          numberOfLines={4}
-          style={{ flex: 1 }}
           placeholder="Deseja compartilhar algo?"
           value={text}
           onChangeText={setText}
+          style={{ paddingHorizontal: 10 }}
         />
       </View>
 
@@ -93,13 +109,22 @@ export default function Post() {
         <Ionicons name="md-camera" size={32} color="#D8D9D2" />
       </TouchableOpacity>
 
-      <View style={{ marginHorizontal: 32, marginTop: 32, height: 150 }}>
+      <View
+        style={{
+          marginHorizontal: 32,
+          marginTop: 32,
+          height: 300,
+          width: "90%",
+        }}
+      >
         <Image
           source={{ uri: image }}
-          style={{ width: "100%", height: "100%" }}
+          fadeDuration={1000}
+          style={{ flex: 1 }}
         />
       </View>
-    </SafeAreaView>
+      <Button title="teste" onPress={() => Alert.alert("teste", image)} />
+    </View>
   );
 }
 
@@ -107,25 +132,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   header: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 32,
     paddingVertical: 12,
+    marginTop: 32,
     borderBottomWidth: 1,
     borderBottomColor: "#D8D9DB",
   },
   inputContainer: {
-    margin: 32,
+    margin: 20,
     flexDirection: "row",
   },
   avatar: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    marginRight: 16,
   },
   photo: {
     alignItems: "flex-end",

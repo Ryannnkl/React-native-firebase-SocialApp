@@ -1,25 +1,29 @@
 import firebaseConfig from "../../config/firebaseConfig";
-import firebase from "firebase";
+import * as firebase from "firebase";
+import "firebase/firestore";
 
 class Fire {
   constructor() {
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    console.disableYellowBox = true;
   }
 
-  addPost = async ({ text, localUrl }) => {
-    const remoteUrl = await this.uploadPhotoAsync(localUrl);
+  addPost = async ({ text, localUri }) => {
+    const remoteUri = await this.uploadPhotoAsync(localUri);
 
     return new Promise((res, rej) => {
       this.firestore
-        .collection("post")
+        .collection("posts")
         .add({
           text,
           uid: this.uid,
           timestamp: this.timestamp,
-          image: remoteUrl,
+          image: remoteUri,
         })
-        .then((ref) => {
-          res(ref);
+        .then((response) => {
+          res(response);
         })
         .catch((err) => {
           rej(err);
@@ -28,13 +32,13 @@ class Fire {
   };
 
   uploadPhotoAsync = async (uri) => {
-    const patyh = `photos/${this.uid}/${Date.now()}.jpg`;
+    const path = `photos/${this.uid}/${Date.now()}.jpg`;
 
-    return Promise(async (res, rej) => {
-      const response = fetch(uri);
-      const file = await res.blob();
+    return new Promise(async (res, rej) => {
+      const response = await fetch(uri);
+      const file = await response.blob();
 
-      let upload = firebase.storage().ref(path).put(file);
+      const upload = firebase.storage().ref(path).put(file);
 
       upload.on(
         "state_changed",
@@ -49,12 +53,13 @@ class Fire {
       );
     });
   };
+
   get firestore() {
     return firebase.firestore();
   }
 
   get uid() {
-    return firebase.auth().currentUser || {};
+    return (firebase.auth().currentUser || {}).uid;
   }
 
   get timestamp() {
