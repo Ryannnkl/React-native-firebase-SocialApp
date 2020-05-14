@@ -1,10 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
+import * as firebase from "firebase";
 
 export default function Profile() {
+  function exitAcont() {
+    firebase.auth().signOut();
+  }
   return (
     <View style={styles.container}>
-      <Text>Profile Screen</Text>
+      <Button title="sair" onPress={() => exitAcont()} />
     </View>
   );
 }
