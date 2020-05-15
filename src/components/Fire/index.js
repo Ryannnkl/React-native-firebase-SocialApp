@@ -59,6 +59,7 @@ class Fire {
         );
     });
   };
+
   sendMessage = (messages) => {
     messages.forEach((item) => {
       const message = {
@@ -67,7 +68,7 @@ class Fire {
         user: item.user,
       };
 
-      this.debug.push(message);
+      this.db.push(message);
     });
   };
 
@@ -90,6 +91,10 @@ class Fire {
 
   off() {
     this.db.off();
+  }
+
+  get userName() {
+    return firebase.auth().currentUser.displayName;
   }
 
   get db() {
