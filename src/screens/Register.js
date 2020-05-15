@@ -42,7 +42,6 @@ export default function Register() {
   }
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#FFF" barStyle="dark-content" />
       <Image
         source={require("../../assets/authHeader.png")}
         style={{

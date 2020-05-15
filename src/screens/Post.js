@@ -5,7 +5,6 @@ import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 
-import firebase from "firebase";
 import "firebase/firestore";
 
 import Fire from "../components/Fire";
@@ -30,7 +29,6 @@ export default function Post() {
 
   useEffect(() => {
     getPhotoPermissions();
-    console.ignoredYellowBox = ["Setting a timer"];
   }, []);
 
   async function getPhotoPermissions() {
@@ -43,13 +41,13 @@ export default function Post() {
     }
   }
 
-  function handlePost() {
+  async function handlePost() {
     const data = {
       text: text.trim(),
       localUri: image,
     };
 
-    Fire.shared
+    return Fire.shared
       .addPost(data)
       .then(() => {
         setText("");
@@ -62,7 +60,7 @@ export default function Post() {
   }
 
   async function pickImage() {
-    let resul = await ImagePicker.launchImageLibraryAsync({
+    const resul = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
@@ -140,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 32,
     paddingVertical: 12,
-    marginTop: 32,
+    marginTop: 5,
     borderBottomWidth: 1,
     borderBottomColor: "#D8D9DB",
   },

@@ -428,7 +428,9 @@ const data = [
 export default function Home() {
   const [posts, setPosts] = useState(data);
 
-  useEffect(() => {});
+  useEffect(() => {
+    console.ignoredYellowBox = true;
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -439,7 +441,7 @@ export default function Home() {
       <FlatList
         style={styles.feed}
         data={posts}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.feedItem}>
