@@ -40,6 +40,7 @@ export default function AppTab() {
           tabBarIcon: ({ color }) => (
             <Ionicons name="ios-chatboxes" color={color} size={26} />
           ),
+          tabBarVisible: false,
         }}
       />
       <Tab.Screen

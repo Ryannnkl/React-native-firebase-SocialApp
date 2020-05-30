@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Button, Image, Text } from "react-native";
+import getImage from "../utils/getImageAdorable";
+
 import * as firebase from "firebase";
 
 import Fire from "../components/Fire";
 
 export default function Profile({ uid }) {
   const [user, setUser] = useState({});
-
+  const avatarUrl = getImage();
   useEffect(() => {
     const user = uid || Fire.shared.uid;
 
@@ -20,21 +22,13 @@ export default function Profile({ uid }) {
     return unsubscribe();
   }, []);
 
-  function exitAcont() {
-    Fire.singOut();
-  }
-
   return (
     <View style={styles.container}>
       <View style={{ marginTop: 32, alignItems: "center" }}>
         <View style={styles.avatarContainer}>
           <Image
             style={styles.avatar}
-            source={
-              user.avatar
-                ? { uri: user.avatar }
-                : { uri: "https://api.adorable.io/avatars/1" }
-            }
+            source={user.avatar ? { uri: user.avatar } : { uri: avatarUrl }}
           />
         </View>
         <Text style={styles.name}>{user.name}</Text>
@@ -53,7 +47,7 @@ export default function Profile({ uid }) {
           <Text style={styles.statTitle}>seguindo</Text>
         </View>
       </View>
-      <Button title="sair" onPress={() => exitAcont()} />
+      <Button title="sair" onPress={() => firebase.auth().signOut()} />
     </View>
   );
 }
@@ -67,6 +61,9 @@ const styles = StyleSheet.create({
     shadowColor: "#151734",
     shadowRadius: 15,
     shadowOpacity: 0.5,
+    borderWidth: 4,
+    borderRadius: 136 / 2,
+    borderColor: "#37373799",
   },
   avatar: {
     width: 136,

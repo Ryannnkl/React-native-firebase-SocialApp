@@ -102,7 +102,7 @@ class Fire {
   }
 
   get singOut() {
-    return firebase.auth().singOut();
+    return firebase.auth().signOut();
   }
 
   get firestore() {

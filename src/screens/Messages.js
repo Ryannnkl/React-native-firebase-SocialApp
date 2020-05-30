@@ -1,54 +1,52 @@
 import React, { useState, useEffect } from "react";
 import {
-  Platform,
-  KeyboardAvoidingView,
-  SafeAreaView,
+  Alert,
   Button,
+  Platform,
+  SafeAreaView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 import Fire from "../components/Fire";
 
-export default function Message(props) {
+export default function Message({ navigation }) {
   const [messages, setMessages] = useState([]);
 
   function user() {
     return {
       _id: Fire.shared.uid,
       name: Fire.shared.userName,
+      avatar: "https://api.adorable.io/avatars/45",
     };
   }
 
-  useEffect(() => {
-    Fire.shared.get((message) => {
-      setMessages((prevState) => GiftedChat.append(prevState));
-    });
-    return Fire.shared.off();
-  }, []);
+  function sendMessage(text) {
+    const temp = GiftedChat.append(messages, text);
+    setMessages(temp);
+  }
 
-  if (Platform.OS === "android") {
+  function chat() {
     return (
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior="padding"
-        keyboardVerticalOffset={30}
-        enabled
+        enabled={false}
       >
+        <Button title="limpar" onPress={() => setMessages([])} />
         <GiftedChat
+          placeholder="Digite aqui..."
           messages={messages}
-          onSend={Fire.shared.sendMessage}
           user={user()}
+          onSend={(text) => sendMessage(text)}
+          showAvatarForEveryMessage
+          alwaysShowSend
+          scrollToBottom
+          showUserAvatar
+          inverted={false}
         />
       </KeyboardAvoidingView>
     );
   }
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Button title="teste" onPress={() => Alert.alert("teste", messages)} />
-      <GiftedChat
-        messages={messages}
-        onSend={Fire.shared.sendMessage}
-        user={user()}
-      />
-    </SafeAreaView>
-  );
+
+  return <SafeAreaView style={{ flex: 1 }}>{chat()}</SafeAreaView>;
 }
