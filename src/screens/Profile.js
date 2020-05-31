@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Button, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Button,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 import getImage from "../utils/getImageAdorable";
 
 import * as firebase from "firebase";
@@ -8,7 +16,7 @@ import Fire from "../components/Fire";
 
 export default function Profile({ uid }) {
   const [user, setUser] = useState({});
-  const avatarUrl = getImage();
+  const [avatarUrl, setAvatarUrl] = useState(getImage());
   useEffect(() => {
     const user = uid || Fire.shared.uid;
 
@@ -22,16 +30,23 @@ export default function Profile({ uid }) {
     return unsubscribe();
   }, []);
 
+  function refreshAvatar() {
+    setAvatarUrl(getImage());
+  }
+
   return (
     <View style={styles.container}>
       <View style={{ marginTop: 32, alignItems: "center" }}>
         <View style={styles.avatarContainer}>
-          <Image
-            style={styles.avatar}
-            source={user.avatar ? { uri: user.avatar } : { uri: avatarUrl }}
-          />
+          <Image style={styles.avatar} source={{ uri: avatarUrl }} />
+          <TouchableOpacity
+            style={styles.tradeIcon}
+            onPress={() => refreshAvatar()}
+          >
+            <FontAwesome5 name="exchange-alt" size={24} color="#FFF" />
+          </TouchableOpacity>
         </View>
-        <Text style={styles.name}>{user.name}</Text>
+        <Text style={styles.name}>Name: {user.name}</Text>
       </View>
       <View style={styles.statusContainer}>
         <View style={styles.status}>
@@ -69,6 +84,17 @@ const styles = StyleSheet.create({
     width: 136,
     height: 136,
     borderRadius: 136 / 2,
+  },
+  tradeIcon: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    width: 40,
+    height: 40,
+    borderRadius: 40 / 2,
+    backgroundColor: "#4278ff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   name: {
     marginTop: 24,

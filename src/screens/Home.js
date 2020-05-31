@@ -427,7 +427,7 @@ const data = [
 
 export default function Home() {
   const [posts, setPosts] = useState(data);
-
+  const hidden = true;
   useEffect(() => {
     console.ignoredYellowBox = true;
   }, []);
@@ -437,56 +437,71 @@ export default function Home() {
       <View style={styles.header}>
         <Text style={styles.textHeader}>Feed</Text>
       </View>
+      {hidden ? (
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <Image
+            style={{ width: 200, height: 200 }}
+            source={{
+              uri: "https://img.icons8.com/bubbles/200/000000/cancel-2.png",
+            }}
+          />
+          <Text style={{ fontSize: 20, fontWeight: "500", color: "#33333350" }}>
+            Estamos sem post para mostrar :(
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          style={styles.feed}
+          data={posts}
+          keyExtractor={(item) => String(item.id)}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={styles.feedItem}>
+              <Image source={{ uri: item.avatar_url }} style={styles.avatar} />
+              <View style={{ flex: 1 }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <View>
+                    <Text style={styles.name}>{item.login}</Text>
+                    <Text style={styles.timestamp}>{item.node_id}</Text>
+                  </View>
 
-      <FlatList
-        style={styles.feed}
-        data={posts}
-        keyExtractor={(item) => String(item.id)}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <View style={styles.feedItem}>
-            <Image source={{ uri: item.avatar_url }} style={styles.avatar} />
-            <View style={{ flex: 1 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <View>
-                  <Text style={styles.name}>{item.login}</Text>
-                  <Text style={styles.timestamp}>{item.node_id}</Text>
+                  <Ionicons name="ios-more" size={24} color="#73788B" />
                 </View>
 
-                <Ionicons name="ios-more" size={24} color="#73788B" />
-              </View>
-
-              <Text style={styles.post}>{item.url}</Text>
-              <Image
-                source={{ uri: item.avatar_url }}
-                resizeMode="cover"
-                style={styles.postImage}
-              />
-
-              <View style={{ flexDirection: "row" }}>
-                <Ionicons
-                  name="ios-heart-empty"
-                  size={24}
-                  color="#73788B"
-                  style={{ marginRight: 16 }}
+                <Text style={styles.post}>{item.url}</Text>
+                <Image
+                  source={{ uri: item.avatar_url }}
+                  resizeMode="cover"
+                  style={styles.postImage}
                 />
-                <Ionicons
-                  name="ios-chatboxes"
-                  size={24}
-                  color="#73788B"
-                  style={{ marginRight: 16 }}
-                />
+
+                <View style={{ flexDirection: "row" }}>
+                  <Ionicons
+                    name="ios-heart-empty"
+                    size={24}
+                    color="#73788B"
+                    style={{ marginRight: 16 }}
+                  />
+                  <Ionicons
+                    name="ios-chatboxes"
+                    size={24}
+                    color="#73788B"
+                    style={{ marginRight: 16 }}
+                  />
+                </View>
               </View>
             </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      )}
     </View>
   );
 }
@@ -513,7 +528,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   textHeader: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "bold",
   },
   feed: {
