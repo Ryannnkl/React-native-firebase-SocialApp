@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import {
   AdMobBanner,
-
   PublisherBanner,
-  
   setTestDeviceIDAsync,
 } from "expo-ads-admob";
 import moment from "moment";
@@ -437,7 +435,7 @@ export default function Home() {
   const [likeIcon, setLikeIcon] = useState("ios-heart-empty");
   const [likeColor, setLikeColor] = useState("#73788B");
 
-  const hidden = true;
+  const hidden = false;
   useEffect(() => {
     console.ignoredYellowBox = true;
   }, []);
@@ -467,7 +465,7 @@ export default function Home() {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          {/* <Image
+          <Image
             style={{ width: 200, height: 200 }}
             source={{
               uri: "https://img.icons8.com/bubbles/200/000000/cancel-2.png",
@@ -475,18 +473,7 @@ export default function Home() {
           />
           <Text style={{ fontSize: 20, fontWeight: "500", color: "#33333350" }}>
             Estamos sem post para mostrar :(
-          </Text> */}
-          <AdMobBanner
-            bannerSize="banner"
-            adUnitID="ca-app-pub-3940256099942544/6300978111"
-            setTestDeviceIDAsync
-            servePersonalizedAds={false}
-            onDidFailToReceiveAdWithError={(err) => console.log("erro", err)}
-          />
-          <PublisherBanner
-            bannerSize="fullBanner"
-            adUnitID="ca-app-pub-3940256099942544/6300978111"
-          />
+          </Text>
         </View>
       ) : (
         <FlatList
@@ -494,6 +481,13 @@ export default function Home() {
           data={posts}
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
+          ListHeaderComponent={() => (
+            <AdMobBanner
+              bannerSize="banner"
+              adUnitID="ca-app-pub-3940256099942544/6300978111"
+              onDidFailToReceiveAdWithError={(err) => console.log("erro", err)}
+            />
+          )}
           renderItem={({ item }) => (
             <>
               <View style={styles.feedItem}>

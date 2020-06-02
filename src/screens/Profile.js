@@ -38,7 +38,7 @@ export default function Profile({ uid }) {
   async function refreshAvatar() {
     setLoading(true);
     await AdMobInterstitial.setAdUnitID(
-      "ca-app-pub-3940256099942544/1033173712"
+      "ca-app-pub-5014682151271774/5298514518"
     );
     await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
     await AdMobInterstitial.showAdAsync();

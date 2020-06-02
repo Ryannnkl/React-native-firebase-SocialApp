@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-5014682151271774~5516924797"
+        "googleMobileAdsAppId": "ca-app-pub-5014682151271774~6724164877"
       }
     },
     "ios": {

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import {
   Text,
+  View,
   Alert,
   Button,
+  StyleSheet,
   SafeAreaView,
   TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
-import { FontAwesome5 } from "@expo/vector-icons";
+
+import GoBack from "../goBackButton";
 import Fire from "../Fire";
 
-export default function Message({ navigation }) {
+export default function Message({ navigation, route }) {
   const [messages, setMessages] = useState([]);
+  const data = route.params.data;
 
   function user() {
     return {
@@ -34,22 +38,10 @@ export default function Message({ navigation }) {
         behavior="padding"
         enabled={false}
       >
-        <TouchableOpacity
-          style={{
-            position: "absolute",
-            top: 10,
-            left: 10,
-            height: 35,
-            width: 35,
-            borderRadius: 35 / 2,
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 5,
-          }}
-          onPress={() => navigation.navigate("AppTab", { screen: "Home" })}
-        >
-          <FontAwesome5 name="arrow-left" size={24} color="#333" />
-        </TouchableOpacity>
+        <GoBack color="#FFF" />
+        <View style={styles.header}>
+          <Text style={styles.name}>{data.name}</Text>
+        </View>
         <GiftedChat
           placeholder="Digite aqui..."
           messages={messages}
@@ -68,3 +60,18 @@ export default function Message({ navigation }) {
 
   return <SafeAreaView style={{ flex: 1 }}>{chat()}</SafeAreaView>;
 }
+
+const styles = StyleSheet.create({
+  header: {
+    width: "100%",
+    height: 90,
+    backgroundColor: "#E9446A",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  name: {
+    color: "#FFF",
+    fontSize: 24,
+    fontWeight: "500",
+  },
+});

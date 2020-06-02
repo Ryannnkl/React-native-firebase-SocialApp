@@ -8,8 +8,9 @@ import AppTab from "./components/tab";
 import Login from "./screens/Login";
 import Loading from "./screens/Loading";
 import Register from "./screens/Register";
-
 import Post from "./screens/Post";
+
+import Message from "./components/MessageScreen";
 
 const firebaseConfig = require("./config/firebaseConfig");
 
@@ -35,6 +36,7 @@ export default function App() {
         <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="AppTab" component={AppTab} />
         <Stack.Screen name="Post" component={Post} />
+        <Stack.Screen name="Message" component={Message} />
       </Stack.Navigator>
     </NavigationContainer>
   );
