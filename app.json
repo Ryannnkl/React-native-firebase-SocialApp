@@ -2,11 +2,7 @@
   "expo": {
     "name": "expo-firebase-SocialApp",
     "slug": "expo-firebase-SocialApp",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,11 +14,17 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-5014682151271774~5516924797"
+      }
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-5014682151271774~5516924797"
+      }
     }
   }
 }

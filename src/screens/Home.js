@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import {
+  AdMobBanner,
+
+  PublisherBanner,
+  
+  setTestDeviceIDAsync,
+} from "expo-ads-admob";
 import moment from "moment";
 import {
   View,
@@ -427,21 +434,40 @@ const data = [
 
 export default function Home() {
   const [posts, setPosts] = useState(data);
+  const [likeIcon, setLikeIcon] = useState("ios-heart-empty");
+  const [likeColor, setLikeColor] = useState("#73788B");
+
   const hidden = true;
   useEffect(() => {
     console.ignoredYellowBox = true;
   }, []);
 
+  const like = () => {
+    if (likeIcon === "ios-heart-empty") {
+      setLikeIcon("ios-heart");
+      setLikeColor("#ff3612");
+    } else {
+      setLikeIcon("ios-heart-empty");
+      setLikeColor("#73788B");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <View style={{ width: 35, height: 35 }} />
         <Text style={styles.textHeader}>Feed</Text>
+        <TouchableOpacity
+          style={{ height: 35, width: 35, borderRadius: 35 / 2 }}
+        >
+          <Ionicons name="ios-person-add" size={26} color="#333333" />
+        </TouchableOpacity>
       </View>
       {hidden ? (
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Image
+          {/* <Image
             style={{ width: 200, height: 200 }}
             source={{
               uri: "https://img.icons8.com/bubbles/200/000000/cancel-2.png",
@@ -449,7 +475,18 @@ export default function Home() {
           />
           <Text style={{ fontSize: 20, fontWeight: "500", color: "#33333350" }}>
             Estamos sem post para mostrar :(
-          </Text>
+          </Text> */}
+          <AdMobBanner
+            bannerSize="banner"
+            adUnitID="ca-app-pub-3940256099942544/6300978111"
+            setTestDeviceIDAsync
+            servePersonalizedAds={false}
+            onDidFailToReceiveAdWithError={(err) => console.log("erro", err)}
+          />
+          <PublisherBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-3940256099942544/6300978111"
+          />
         </View>
       ) : (
         <FlatList
@@ -458,47 +495,54 @@ export default function Home() {
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={styles.feedItem}>
-              <Image source={{ uri: item.avatar_url }} style={styles.avatar} />
-              <View style={{ flex: 1 }}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <View>
-                    <Text style={styles.name}>{item.login}</Text>
-                    <Text style={styles.timestamp}>{item.node_id}</Text>
-                  </View>
-
-                  <Ionicons name="ios-more" size={24} color="#73788B" />
-                </View>
-
-                <Text style={styles.post}>{item.url}</Text>
+            <>
+              <View style={styles.feedItem}>
                 <Image
                   source={{ uri: item.avatar_url }}
-                  resizeMode="cover"
-                  style={styles.postImage}
+                  style={styles.avatar}
                 />
+                <View style={{ flex: 1 }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <View>
+                      <Text style={styles.name}>{item.login}</Text>
+                      <Text style={styles.timestamp}>{item.node_id}</Text>
+                    </View>
 
-                <View style={{ flexDirection: "row" }}>
-                  <Ionicons
-                    name="ios-heart-empty"
-                    size={24}
-                    color="#73788B"
-                    style={{ marginRight: 16 }}
+                    <Ionicons name="ios-more" size={24} color="#73788B" />
+                  </View>
+
+                  <Text style={styles.post}>{item.url}</Text>
+                  <Image
+                    source={{ uri: item.avatar_url }}
+                    resizeMode="cover"
+                    style={styles.postImage}
                   />
-                  <Ionicons
-                    name="ios-chatboxes"
-                    size={24}
-                    color="#73788B"
-                    style={{ marginRight: 16 }}
-                  />
+
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity onPress={like}>
+                      <Ionicons
+                        name={likeIcon}
+                        size={24}
+                        color={likeColor}
+                        style={{ marginRight: 16 }}
+                      />
+                    </TouchableOpacity>
+                    <Ionicons
+                      name="ios-chatboxes"
+                      size={24}
+                      color={"#73788B"}
+                      style={{ marginRight: 16 }}
+                    />
+                  </View>
                 </View>
               </View>
-            </View>
+            </>
           )}
         />
       )}
@@ -516,8 +560,9 @@ const styles = StyleSheet.create({
     paddingTop: 34,
     paddingBottom: 16,
     backgroundColor: "#FFF",
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: "#EBECF4",
     shadowColor: "#454D65",

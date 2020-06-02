@@ -15,12 +15,20 @@ class Fire {
     this.uploadPhotoAsync(localUri)
       .then((uri) => {
         new Promise(async (res, rej) => {
-          const response = await firebase.firestore().collection("posts").add({
-            text,
-            uid: this.uid,
-            timestamp: this.timestamp,
-            image: uri,
-          });
+          const response = await firebase
+            .firestore()
+            .collection("posts")
+            .doc(this.uid)
+            .set([
+              {
+                data: {
+                  text,
+                  uid: this.uid,
+                  timestamp: this.timestamp,
+                  image: uri,
+                },
+              },
+            ]);
           console.log("resposta do addPost(): ", response);
           return res(response);
         });

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  StyleSheet,
-  Button,
-  Image,
   Text,
+  Image,
+  Button,
+  StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
+import { AdMobInterstitial } from "expo-ads-admob";
 import { FontAwesome5 } from "@expo/vector-icons";
 import getImage from "../utils/getImageAdorable";
 
@@ -16,8 +18,11 @@ import Fire from "../components/Fire";
 
 export default function Profile({ uid }) {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(getImage());
+
   useEffect(() => {
+    console.disableYellowBox = true;
     const user = uid || Fire.shared.uid;
 
     const unsubscribe = Fire.shared.firestore
@@ -30,8 +35,24 @@ export default function Profile({ uid }) {
     return unsubscribe();
   }, []);
 
-  function refreshAvatar() {
+  async function refreshAvatar() {
+    setLoading(true);
+    await AdMobInterstitial.setAdUnitID(
+      "ca-app-pub-3940256099942544/1033173712"
+    );
+    await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
+    await AdMobInterstitial.showAdAsync();
     setAvatarUrl(getImage());
+    setLoading(false);
+  }
+
+  async function getData() {
+    const db = firebase.firestore();
+    db.collection("posts")
+      .get()
+      .then((response) => {
+        console.log(response);
+      });
   }
 
   return (
@@ -39,11 +60,16 @@ export default function Profile({ uid }) {
       <View style={{ marginTop: 32, alignItems: "center" }}>
         <View style={styles.avatarContainer}>
           <Image style={styles.avatar} source={{ uri: avatarUrl }} />
+
           <TouchableOpacity
             style={styles.tradeIcon}
             onPress={() => refreshAvatar()}
           >
-            <FontAwesome5 name="exchange-alt" size={24} color="#FFF" />
+            {loading ? (
+              <ActivityIndicator size="small" color="#FFF" />
+            ) : (
+              <FontAwesome5 name="exchange-alt" size={24} color="#FFF" />
+            )}
           </TouchableOpacity>
         </View>
         <Text style={styles.name}>Name: {user.name}</Text>
@@ -62,7 +88,7 @@ export default function Profile({ uid }) {
           <Text style={styles.statTitle}>seguindo</Text>
         </View>
       </View>
-      <Button title="sair" onPress={() => firebase.auth().signOut()} />
+      <Button title="teste" onPress={() => getData()} />
     </View>
   );
 }
