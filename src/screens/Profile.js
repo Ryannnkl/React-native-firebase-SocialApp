@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { AdMobInterstitial } from "expo-ads-admob";
+import { AdMobInterstitial, AdMobRewarded } from "expo-ads-admob";
 import { FontAwesome5 } from "@expo/vector-icons";
 import getImage from "../utils/getImageAdorable";
 
@@ -20,6 +20,12 @@ export default function Profile({ uid }) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(getImage());
+
+  async function test() {
+    await AdMobRewarded.setAdUnitID("ca-app-pub-5014682151271774/8339379314");
+    await AdMobRewarded.requestAdAsync();
+    await AdMobRewarded.showAdAsync();
+  }
 
   useEffect(() => {
     console.disableYellowBox = true;
@@ -37,11 +43,7 @@ export default function Profile({ uid }) {
 
   async function refreshAvatar() {
     setLoading(true);
-    await AdMobInterstitial.setAdUnitID(
-      "ca-app-pub-5014682151271774/5298514518"
-    );
-    await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
-    await AdMobInterstitial.showAdAsync();
+    await test();
     setAvatarUrl(getImage());
     setLoading(false);
   }
