@@ -9,6 +9,7 @@ import Login from "./screens/Login";
 import Loading from "./screens/Loading";
 import Register from "./screens/Register";
 import Post from "./screens/Post";
+import Contacts from "./screens/Contacts";
 
 import Message from "./components/MessageScreen";
 
@@ -37,6 +38,7 @@ export default function App() {
         <Stack.Screen name="AppTab" component={AppTab} />
         <Stack.Screen name="Post" component={Post} />
         <Stack.Screen name="Message" component={Message} />
+        <Stack.Screen name="Contacts" component={Contacts} />
       </Stack.Navigator>
     </NavigationContainer>
   );

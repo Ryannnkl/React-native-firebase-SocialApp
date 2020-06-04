@@ -42,10 +42,13 @@ export default function Profile({ uid }) {
   }, []);
 
   async function refreshAvatar() {
+    if (loading) {
+      return setLoading(false);
+    }
     setLoading(true);
     await test();
-    setAvatarUrl(getImage());
     setLoading(false);
+    setAvatarUrl(getImage());
   }
 
   async function getData() {

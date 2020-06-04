@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
 
-import GoBack from "../goBackButton";
+import Header from "../Header";
 import Fire from "../Fire";
 
 export default function Message({ navigation, route }) {
@@ -38,10 +38,12 @@ export default function Message({ navigation, route }) {
         behavior="padding"
         enabled={false}
       >
-        <GoBack color="#FFF" />
-        <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-        </View>
+        <Header
+          text={data.name}
+          color="#E9446A"
+          textColor="#FFF"
+          arrowColor="#FFF"
+        />
         <GiftedChat
           placeholder="Digite aqui..."
           messages={messages}

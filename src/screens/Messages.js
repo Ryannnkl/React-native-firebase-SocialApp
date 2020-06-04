@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import GoBack from "../components/goBackButton";
+import { FontAwesome5 } from "@expo/vector-icons";
+import Header from "../components/Header";
 
 const data = [
   {
@@ -29,34 +30,40 @@ export default function Messages({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <GoBack />
-        <Text style={styles.textHeader}>Menssagens</Text>
-      </View>
+      <Header text="Menssagens" />
+
       {true ? (
-        <FlatList
-          data={chats}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          style={{ width: "100%", height: "100%" }}
-          renderItem={({ item }) => (
-            <View style={styles.contentChat}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Message", { data: item })}
-                style={styles.contentChatUser}
-              >
-                <Image
-                  style={styles.avatarImage}
-                  source={{ uri: item.avatar }}
-                />
-                <View style={{ flex: 1, alignItems: "flex-start" }}>
-                  <Text style={styles.name}>{item.name}</Text>
-                  <Text style={{ color: "#777" }}>{item.last}</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
+        <>
+          <FlatList
+            data={chats}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            style={{ width: "100%", height: "100%" }}
+            renderItem={({ item }) => (
+              <View style={styles.contentChat}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Message", { data: item })}
+                  style={styles.contentChatUser}
+                >
+                  <Image
+                    style={styles.avatarImage}
+                    source={{ uri: item.avatar }}
+                  />
+                  <View style={{ flex: 1, alignItems: "flex-start" }}>
+                    <Text style={styles.name}>{item.name}</Text>
+                    <Text style={{ color: "#777" }}>{item.last}</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+          <TouchableOpacity
+            style={styles.chatButton}
+            onPress={() => navigation.navigate("Contacts")}
+          >
+            <FontAwesome5 name="users" size={30} color="#FFF" />
+          </TouchableOpacity>
+        </>
       ) : (
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -118,6 +125,17 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: "bold",
     fontSize: 16,
+  },
+  chatButton: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+    height: 70,
+    width: 70,
+    borderRadius: 70 / 2,
+    backgroundColor: "#123178",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
