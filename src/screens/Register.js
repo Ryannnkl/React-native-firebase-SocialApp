@@ -14,6 +14,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+import getAvatarUrl from "../utils/getImageAdorable";
+
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,6 +34,7 @@ export default function Register() {
         setLoading(false);
         userCredentials.user.updateProfile({
           displayName: name,
+          photoURL: getAvatarUrl(),
         });
         navigation.navigate("AppTab", { screen: "home" });
       })
@@ -40,6 +43,7 @@ export default function Register() {
         setError(err.message);
       });
   }
+
   return (
     <View style={styles.container}>
       <Image

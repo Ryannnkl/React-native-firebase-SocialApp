@@ -24,11 +24,15 @@ import {
 export default function Post() {
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(
+    "https://img.icons8.com/material-outlined/24/000000/user--v1.png"
+  );
 
   const navigation = useNavigation();
 
   useEffect(() => {
     getPhotoPermissions();
+    setPhotoUrl(Fire.shared.userData.photoURL);
   }, []);
 
   async function getPhotoPermissions() {
@@ -45,6 +49,8 @@ export default function Post() {
     const data = {
       text: text.trim(),
       localUri: image,
+      likes: 0,
+      comments: [],
     };
 
     return Fire.shared
@@ -91,8 +97,10 @@ export default function Post() {
 
       <View style={styles.inputContainer}>
         <Image
-          style={{ height: 75, width: 75, borderRadius: 75 / 2 }}
-          source={require("../../assets/loginLogo.png")}
+          style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
+          source={{
+            uri: photoUrl,
+          }}
         />
         <TextInput
           autoFocus

@@ -249,7 +249,7 @@ export default function Home() {
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={() => (
             <AdMobBanner
-              bannerSize="banner"
+              bannerSize="fullBanner"
               adUnitID="ca-app-pub-5014682151271774/2678228210"
               servePersonalizedAds
               onDidFailToReceiveAdWithError={(err) => console.log(err)}

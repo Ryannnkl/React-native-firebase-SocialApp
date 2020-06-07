@@ -11,7 +11,7 @@ class Fire {
     console.ignoredYellowBox = true;
   }
 
-  addPost = async ({ text, localUri }) => {
+  addPost = async ({ text, localUri, likes, comments }) => {
     this.uploadPhotoAsync(localUri)
       .then((uri) => {
         new Promise(async (res, rej) => {
@@ -19,17 +19,19 @@ class Fire {
             .firestore()
             .collection("posts")
             .doc(this.uid)
-            .set([
-              {
-                data: {
+            .set({
+              posts: [
+                {
                   text,
+                  likes,
+                  comments,
                   uid: this.uid,
                   timestamp: this.timestamp,
                   image: uri,
                 },
-              },
-            ]);
-          console.log("resposta do addPost(): ", response);
+              ],
+            });
+
           return res(response);
         });
       })
@@ -101,8 +103,8 @@ class Fire {
     this.db.off();
   }
 
-  get userName() {
-    return firebase.auth().currentUser.displayName;
+  get userData() {
+    return firebase.auth().currentUser;
   }
 
   get db() {
