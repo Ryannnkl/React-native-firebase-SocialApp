@@ -31,12 +31,23 @@ export default function Register() {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredentials) => {
-        setLoading(false);
-        userCredentials.user.updateProfile({
-          displayName: name,
-          photoURL: getAvatarUrl(),
-        });
-        navigation.navigate("AppTab", { screen: "home" });
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(userCredentials.user.uid)
+          .set({
+            posts: 0,
+            followers: 0,
+            following: 0,
+          })
+          .then(() => {
+            userCredentials.user.updateProfile({
+              displayName: name,
+              photoURL: getAvatarUrl(),
+            });
+            setLoading(false);
+            navigation.navigate("AppTab", { screen: "Home" });
+          });
       })
       .catch((err) => {
         setLoading(false);

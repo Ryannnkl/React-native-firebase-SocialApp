@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
+
 import { AdMobRewarded } from "expo-ads-admob";
 import { FontAwesome5 } from "@expo/vector-icons";
 import getImage from "../utils/getImageAdorable";
@@ -18,19 +19,26 @@ import * as firebase from "firebase";
 import Fire from "../components/Fire";
 
 export default function Profile() {
-  const [avatarUrl, setAvatarUrl] = useState(getImage());
-  const [user, setUser] = useState({});
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [userName, setUserName] = useState();
   const [loading, setLoading] = useState(false);
+  const [ifons, setInfos] = useState({});
 
   async function test() {
-    await AdMobRewarded.setAdUnitID("ca-app-pub-5014682151271774/8339379314");
+    await AdMobRewarded.setAdUnitID("ca-app-pub-5014682151271774/3906623363");
     await AdMobRewarded.requestAdAsync();
     await AdMobRewarded.showAdAsync();
   }
 
   useEffect(() => {
-    setUser(Fire.shared.userData);
-    setAvatarUrl(user.photoURL);
+    setUserName(Fire.shared.userData.displayName);
+    setAvatarUrl(Fire.shared.userData.photoURL);
+    console.log(Fire.shared.uid);
+    // firebase
+    //   .firestore("users")
+    //   .doc(Fire.shared.uid)
+    //   .get()
+    //   .then((response) => console.log(response));
   }, []);
 
   useEffect(() => {
@@ -69,8 +77,9 @@ export default function Profile() {
             )}
           </TouchableOpacity>
         </View>
-        <Text style={styles.name}>Name: {user.displayName}</Text>
+        <Text style={styles.name}>Name: {userName}</Text>
       </View>
+
       <View style={styles.statusContainer}>
         <View style={styles.status}>
           <Text style={styles.statAmount}>21</Text>

@@ -250,7 +250,7 @@ export default function Home() {
           ListHeaderComponent={() => (
             <AdMobBanner
               bannerSize="fullBanner"
-              adUnitID="ca-app-pub-5014682151271774/2678228210"
+              adUnitID="ca-app-pub-5014682151271774/3295075815"
               servePersonalizedAds
               onDidFailToReceiveAdWithError={(err) => console.log(err)}
             />
@@ -303,6 +303,12 @@ export default function Home() {
                   </View>
                 </View>
               </View>
+              <AdMobBanner
+                bannerSize="fullBanner"
+                adUnitID="ca-app-pub-5014682151271774/3295075815"
+                servePersonalizedAds
+                onDidFailToReceiveAdWithError={(err) => console.log(err)}
+              />
             </>
           )}
         />
