@@ -6,6 +6,7 @@ import {
   Image,
   Button,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
@@ -22,7 +23,7 @@ export default function Profile() {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [userName, setUserName] = useState();
   const [loading, setLoading] = useState(false);
-  const [ifons, setInfos] = useState({});
+  const [infos, setInfos] = useState({});
 
   async function test() {
     await AdMobRewarded.setAdUnitID("ca-app-pub-5014682151271774/3906623363");
@@ -31,14 +32,17 @@ export default function Profile() {
   }
 
   useEffect(() => {
+    console.disableYellowBox = true;
     setUserName(Fire.shared.userData.displayName);
     setAvatarUrl(Fire.shared.userData.photoURL);
-    console.log(Fire.shared.uid);
-    // firebase
-    //   .firestore("users")
-    //   .doc(Fire.shared.uid)
-    //   .get()
-    //   .then((response) => console.log(response));
+    Fire.shared.userInfos
+      .get()
+      .then(function (doc) {
+        setInfos(doc.data());
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
   }, []);
 
   useEffect(() => {
@@ -52,8 +56,7 @@ export default function Profile() {
     setLoading(true);
 
     setAvatarUrl(getImage());
-    const user = firebase.auth().currentUser;
-    user
+    Fire.shared.userData
       .updateProfile({
         photoURL: avatarUrl,
       })
@@ -82,19 +85,19 @@ export default function Profile() {
 
       <View style={styles.statusContainer}>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>21</Text>
+          <Text style={styles.statAmount}>{infos.posts}</Text>
           <Text style={styles.statTitle}>posts</Text>
         </View>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>983</Text>
+          <Text style={styles.statAmount}>{infos.followers}</Text>
           <Text style={styles.statTitle}>seguidores</Text>
         </View>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>456</Text>
+          <Text style={styles.statAmount}>{infos.following}</Text>
           <Text style={styles.statTitle}>seguindo</Text>
         </View>
       </View>
-      <Button title="teste" onPress={() => console.log(user)} />
+      <FlatList style={styles.containerPosts} />
       <Button title="sair" onPress={() => firebase.auth().signOut()} />
     </View>
   );
@@ -113,6 +116,14 @@ const styles = StyleSheet.create({
     borderRadius: 136 / 2,
     borderColor: "#37373799",
   },
+  containerPosts: {
+    width: "95%",
+    height: "auto",
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: "#C3c5cd",
+    borderRadius: 2,
+  },
+
   avatar: {
     width: 136,
     height: 136,

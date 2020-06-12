@@ -26,6 +26,7 @@ export default function Register() {
   const navigation = useNavigation();
 
   function handleSignUp() {
+    const avatarUrl = getAvatarUrl();
     setLoading(true);
     firebase
       .auth()
@@ -39,11 +40,13 @@ export default function Register() {
             posts: 0,
             followers: 0,
             following: 0,
+            name: name,
+            photoURL: avatarUrl,
           })
           .then(() => {
             userCredentials.user.updateProfile({
               displayName: name,
-              photoURL: getAvatarUrl(),
+              photoURL: avatarUrl,
             });
             setLoading(false);
             navigation.navigate("AppTab", { screen: "Home" });
