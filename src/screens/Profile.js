@@ -6,6 +6,7 @@ import {
   Image,
   Button,
   StyleSheet,
+  FlatList,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,

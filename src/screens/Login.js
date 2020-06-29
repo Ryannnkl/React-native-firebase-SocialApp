@@ -52,7 +52,9 @@ export default function Login() {
           style={{ alignSelf: "center", marginTop: 44 }}
         />
 
-        <Text style={styles.greeting}>{`Olá denovo.\nBem vindo de volta`}</Text>
+        <Text
+          style={styles.greeting}
+        >{`Olá de novo.\nBem vindo de volta`}</Text>
 
         <View style={styles.errorMessage}>
           {error && <Text style={styles.error}>{error}</Text>}
@@ -135,6 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
+    zIndex: 5,
   },
   errorMessage: {
     height: 72,

@@ -14,8 +14,10 @@ import {
   LayoutAnimation,
 } from "react-native";
 import * as firebase from "firebase";
+import Fire from "../components/Fire";
 
 // "add moment(item.timestamp).fromNow()" in code "item.node_id"
+const data = Fire.shared.fakeData;
 
 export default function Home() {
   const [posts, setPosts] = useState(data);

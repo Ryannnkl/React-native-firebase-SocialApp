@@ -2,6 +2,7 @@ node_modules/**/*
 .expo/*
 .expo-shared
 .vscode
+.env
 npm-debug.*
 config/**/*
 *.jks

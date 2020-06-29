@@ -58,12 +58,7 @@ export default function AppTab() {
               name="ios-add-circle"
               color={"#E9446A"}
               size={48}
-              style={{
-                shadowColor: "#E9446A",
-                shadowOffset: { width: 0, height: 0 },
-                shadowRadius: 10,
-                shadowOpacity: 0.3,
-              }}
+              
             />
           ),
         }}
