@@ -20,6 +20,8 @@ import * as firebase from "firebase";
 
 import Fire from "../components/Fire";
 
+const data = Fire.shared.fakeData;
+
 export default function Profile() {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [userName, setUserName] = useState();
@@ -66,7 +68,11 @@ export default function Profile() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}
+      style={styles.container}
+    >
       <View style={{ marginTop: 32, alignItems: "center" }}>
         <View style={styles.avatarContainer}>
           <Image style={styles.avatar} source={{ uri: avatarUrl }} />
@@ -86,28 +92,61 @@ export default function Profile() {
 
       <View style={styles.statusContainer}>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>{infos.posts}</Text>
+          <Text style={styles.statAmount}>{infos.posts ? infos.posts : 0}</Text>
           <Text style={styles.statTitle}>posts</Text>
         </View>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>{infos.followers}</Text>
+          <Text style={styles.statAmount}>
+            {infos.folloers ? infos.folloers : 0}
+          </Text>
           <Text style={styles.statTitle}>seguidores</Text>
         </View>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>{infos.following}</Text>
+          <Text style={styles.statAmount}>
+            {infos.following ? infos.folowing : 0}
+          </Text>
           <Text style={styles.statTitle}>seguindo</Text>
         </View>
       </View>
-      <FlatList style={styles.containerPosts} />
+      <FlatList
+        style={styles.containerPosts}
+        data={data}
+        renderItem={({ item }) => {
+          return item ? (
+            <View
+              key={item.id}
+              style={{
+                flex: 1,
+                borderWith: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <View style={styles.post}>
+                <Image source={{ uri: item.avatar_url }} width={100} />
+              </View>
+            </View>
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text>Que tal postar algumas fotos ?</Text>
+            </View>
+          );
+        }}
+      />
       <Button title="sair" onPress={() => firebase.auth().signOut()} />
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
   },
   avatarContainer: {
     shadowColor: "#151734",
@@ -165,5 +204,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     marginTop: 4,
+  },
+  post: {
+    height: 50,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 4,
+    borderColor: "#333",
   },
 });

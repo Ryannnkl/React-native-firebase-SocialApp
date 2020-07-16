@@ -1,8 +1,9 @@
 node_modules/**/*
 .expo/*
-.expo-shared
+.expo-shared/*
 .vscode
 .env
+app.json
 npm-debug.*
 config/**/*
 *.jks

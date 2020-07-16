@@ -260,6 +260,49 @@ class Fire {
         type: "User",
         site_admin: false,
       },
+      {
+        login: "anotherjesse",
+        id: 30,
+        node_id: "MDQ6VXNlcjI3",
+        avatar_url: "https://avatars3.githubusercontent.com/u/27?v=4",
+        gravatar_id: "",
+        url: "https://api.github.com/users/anotherjesse",
+        html_url: "https://github.com/anotherjesse",
+        followers_url: "https://api.github.com/users/anotherjesse/followers",
+        following_url:
+          "https://api.github.com/users/anotherjesse/following{/other_user}",
+        gists_url: "https://api.github.com/users/anotherjesse/gists{/gist_id}",
+        type: "User",
+        site_admin: false,
+      },
+      {
+        login: "roland",
+        id: 31,
+        node_id: "MDQ6VXNlcjI4",
+        avatar_url: "https://avatars2.githubusercontent.com/u/28?v=4",
+        gravatar_id: "",
+        url: "https://api.github.com/users/roland",
+        html_url: "https://github.com/roland",
+        followers_url: "https://api.github.com/users/roland/followers",
+        following_url:
+          "https://api.github.com/users/roland/following{/other_user}",
+        type: "User",
+        site_admin: false,
+      },
+      {
+        login: "lukas",
+        id: 32,
+        node_id: "MDQ6VXNlcjI5",
+        avatar_url: "https://avatars2.githubusercontent.com/u/29?v=4",
+        gravatar_id: "",
+        url: "https://api.github.com/users/lukas",
+        html_url: "https://github.com/lukas",
+        followers_url: "https://api.github.com/users/lukas/followers",
+        following_url:
+          "https://api.github.com/users/lukas/following{/other_user}",
+        type: "User",
+        site_admin: false,
+      },
     ];
   }
 }
