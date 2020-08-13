@@ -15,5 +15,6 @@ config/**/*
 web-build/
 web-report/
 
+yarn-error.lock
 # macOS
 .DS_Store
