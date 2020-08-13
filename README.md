@@ -1,7 +1,7 @@
 <h3 align="center">
   <p>
-    <img src="https://img.icons8.com/color/96/000000/firebase.png"/> 
-    <img src="https://img.icons8.com/color/96/000000/react-native.png"/>
+    <img src="https://img.icons8.com/color/184/000000/firebase.png"/> 
+    <img src="https://img.icons8.com/color/184/000000/react-native.png"/>
   </p>
   <b>SocialApp with Firebase</b>
   <br/>
