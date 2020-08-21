@@ -20,7 +20,7 @@
     "firebase": "7.19.0",
     "moment": "^2.27.0",
     "react": "16.13.1",
-    "react-dom": "16.11.0",
+    "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-gifted-chat": "^0.16.3",
