@@ -92,18 +92,20 @@ export default function Profile() {
 
       <View style={styles.statusContainer}>
         <View style={styles.status}>
-          <Text style={styles.statAmount}>{infos.posts ? infos.posts : 0}</Text>
+          <Text style={styles.statAmount}>
+            {infos?.posts ? infos?.posts : 0}
+          </Text>
           <Text style={styles.statTitle}>posts</Text>
         </View>
         <View style={styles.status}>
           <Text style={styles.statAmount}>
-            {infos.folloers ? infos.folloers : 0}
+            {infos?.folloers ? infos?.folloers : 0}
           </Text>
           <Text style={styles.statTitle}>seguidores</Text>
         </View>
         <View style={styles.status}>
           <Text style={styles.statAmount}>
-            {infos.following ? infos.folowing : 0}
+            {infos?.following ? infos?.folowing : 0}
           </Text>
           <Text style={styles.statTitle}>seguindo</Text>
         </View>
@@ -139,7 +141,7 @@ export default function Profile() {
           );
         }}
       />
-      <Button title="sair" onPress={() => firebase.auth().signOut()} />
+      <Button title="sair" onPress={() => Fire.shared.singOut()} />
     </ScrollView>
   );
 }

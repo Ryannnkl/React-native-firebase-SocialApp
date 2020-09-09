@@ -84,7 +84,9 @@ export default function Register() {
         </TouchableOpacity>
         <Text style={styles.greeting}>{`Olá !\nCadastre-se para iniciar`}</Text>
 
-        <Text>{error && <Text>{error}</Text>}</Text>
+        <View style={styles.errorMessage}>
+          {error && <Text style={styles.error}>{error}</Text>}
+        </View>
         <View style={styles.form}>
           <View>
             <Text style={styles.inputTitle}>Nome</Text>

@@ -1,6 +1,6 @@
 node_modules/**/*
-.expo/*
-.expo-shared/*
+.expo/
+.expo-shared/
 .vscode
 .env
 app.json
@@ -15,6 +15,7 @@ config/**/*
 web-build/
 web-report/
 
+firebaseConfig.json
 yarn-error.lock
 # macOS
 .DS_Store

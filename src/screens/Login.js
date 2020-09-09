@@ -57,7 +57,7 @@ export default function Login() {
         >{`Olá de novo.\nBem vindo de volta`}</Text>
 
         <View style={styles.errorMessage}>
-          {error && <Text style={styles.error}>{error}</Text>}
+          {error && <Text style={styles.errorText}>{error}</Text>}
         </View>
 
         <View style={styles.form}>
@@ -87,7 +87,11 @@ export default function Login() {
           {loading ? (
             <ActivityIndicator size="small" color="#FFF" />
           ) : (
-            <Text style={{ color: "#FFF", fontWeight: "500" }}>Entrar</Text>
+            <Text
+              style={{ color: "#FFF", fontWeight: "500", fontWeight: "bold" }}
+            >
+              Entrar
+            </Text>
           )}
         </TouchableOpacity>
 
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 30,
   },
-  error: {
+  errorText: {
     color: "#E9446A",
     fontSize: 14,
     fontWeight: "bold",
