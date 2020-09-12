@@ -19,7 +19,7 @@
 
 # Rede Social Feita com Expo e Firebase
 
-> Testar o potencial do Firebase com relacionamentos de dados mesmo sendo um banco não relacional
+> Firebase é um banco não relacional com muitas limitações (ou falta de conhecimento da minha parte), mas ainda sim é um bom banco para aplicações simples, não aconselho para coisas mais complexas como nesse caso
 
 ## O que usa?
 
