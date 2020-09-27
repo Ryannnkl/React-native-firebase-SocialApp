@@ -2906,16 +2906,6 @@ expo-location@~9.0.0:
   resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-9.0.0.tgz#43906dbd503803f6029a814df51f0370c3b4a765"
   integrity sha512-HsPyn/S73LS/LKpK0Cd/H9Dm9PohbnojYUM475s9DEeOBQitYbnSCKNdSz5vkG+Fqqh6mh4eHPy9dF/21I2rkg==
 
-expo-permissions@~9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.0.1.tgz#dc10b58654bbe39bbbed5827369942b01b08055e"
-  integrity sha512-CosJgy8XQRN/OFG2JTQDcFxz3XTGi27coCMym/hVXWtQfk0z6PwdRG5IXHfLGuSckwIcgmirrwm2+Zc0X3MmNg==
-
-expo-permissions@~9.3.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.3.0.tgz#b90c7e9e411d306c1c7ba2bae18d5c53c201affd"
-  integrity sha512-ylSJZVvEGJVFTKsFrUL2S6gCvFt+/o8TJ3xT4WaMjHe2/2Z7R8ng6NR47Kt54t7XBIV/SZ7DIY9uRiR7TPuNYA==
-
 expo-permissions@~9.3.0:
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.3.0.tgz#b90c7e9e411d306c1c7ba2bae18d5c53c201affd"
