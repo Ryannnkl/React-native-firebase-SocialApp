@@ -14,7 +14,7 @@
     "@react-navigation/stack": "^5.9.3",
     "expo": "^39.0.3",
     "expo-ads-admob": "~8.2.1",
-    "expo-constants": "~9.1.1",
+    "expo-constants": "~9.2.0",
     "expo-image-picker": "~9.1.1",
     "expo-permissions": "~9.3.0",
     "firebase": "7.23.0",
