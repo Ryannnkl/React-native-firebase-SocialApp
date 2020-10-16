@@ -19,7 +19,7 @@
     "expo-permissions": "~9.3.0",
     "firebase": "7.23.0",
     "moment": "^2.27.0",
-    "react": "16.13.1",
+    "react": "16.14.0",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-gesture-handler": "~1.8.0",
