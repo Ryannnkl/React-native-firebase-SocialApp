@@ -5408,10 +5408,10 @@ react-native-typing-animation@^0.1.7:
   resolved "https://registry.yarnpkg.com/react-native-typing-animation/-/react-native-typing-animation-0.1.7.tgz#8f2cf08d9400ae543a110292eb7d71523dda5528"
   integrity sha512-4H3rF9M+I2yAZpYJcY0Mb29TXkn98QK12rrKSY6LZj1BQD9NNmRZuNXzwX4XHapsIz+N/J8M3p27FOQPbfzqeg==
 
-react-native-web@~0.13.7:
-  version "0.13.18"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.13.18.tgz#964f058a16521a3b9a31b091415edfef5b6ef305"
-  integrity sha512-WR/0ECAmwLQ2+2cL2Ur+0/swXFAtcSM0URoADJmG6D4MnY+wGc91JO8LoOTlgY0USBOY+qG/beRrjFa+RAuOiA==
+react-native-web@~0.14.12:
+  version "0.14.12"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.14.12.tgz#6ac0d648ddcc6b917ff0d22f1ba2bc0c294276f2"
+  integrity sha512-Rv7mBvcACRk//sNSuAprBvB9oxejzifwWw4CkX7w4qRzynXgi1J1+6UG2zaDXqLct8GRR3Rr1UQbKoP3cXAU0A==
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
